@@ -4,8 +4,8 @@ import openai
 
 MARKDOWN_PROMPT = """
 Your task is to translate a Markdown file, while preserving the original formatting,
-including inline elements like links and images. Make sure to ignore HTML tags and code blocks,
-but translate code comments. Be cautious when translating Markdown links,
+including inline elements like links and images. Make sure to ignore text inside HTML tags and code blocks.
+Be cautious when translating Markdown links,
 Markdown images, and Markdown headings. Make sure TOC links like (#content) are translated.
 """
 
@@ -63,7 +63,7 @@ def translate(text: str, source_language: str, target_language: str, api_key: st
         try:
             system_prompt = f"You are a helpful assistant that translates {source_language} to {target_language}. {file_prompt}"
             user_prompt = f"""Instructions: Translate the following {source_language} text to {target_language} 
-while maintaining the original formatting: "{text}", and do not translate text inside "```" or code blocks.
+while maintaining the original formatting: "{text}"
 format: Return only the translated content, not including the original text."""
             logging.info(f"Translating paragraphs: {text}")
             logging.info(f"System prompt: {system_prompt}")
