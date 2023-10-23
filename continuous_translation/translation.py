@@ -63,7 +63,7 @@ def translate(text: str, source_language: str, target_language: str, api_key: st
         try:
             system_prompt = f"You are a helpful assistant that translates {source_language} to {target_language}. {file_prompt}"
             user_prompt = f"""Instructions: Translate the following {source_language} text to {target_language} 
-while maintaining the original formatting: "{text}".
+while maintaining the original formatting: "{text}", and do not translate text inside "```" or code blocks.
 format: Return only the translated content, not including the original text."""
             logging.info(f"Translating paragraphs: {text}")
             logging.info(f"System prompt: {system_prompt}")
