@@ -52,11 +52,14 @@ def process_files(repo_path: str, config, translate_func: str):
             merged_paragraphs = merge_paragraphs(paragraphs, 10240)
 
             translated = ""
-            for merged_paragraph in merged_paragraphs:
-                translated_merged_paragraph = translate_func(
-                    merged_paragraph, source_language, target_language, api_key, file_type_prompt)
+            # for merged_paragraph in merged_paragraphs:
+            #     translated_merged_paragraph = translate_func(
+            #         merged_paragraph, source_language, target_language, api_key, file_type_prompt)
+            #     # 合并的翻译段落
+            #     translated += translated_merged_paragraph
+            translated = translate_func(
+                    paragraphs, source_language, target_language, api_key, file_type_prompt)
                 # 合并的翻译段落
-                translated += translated_merged_paragraph
 
             logging.info("Translation completed.")
 
