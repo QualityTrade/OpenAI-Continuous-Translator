@@ -9,13 +9,11 @@ def merge_paragraphs(paragraphs, max_length):
     current_paragraph = ""
 
     for paragraph in paragraphs:
-        # if len(current_paragraph) + len(paragraph) + 1 <= max_length:
-        #     current_paragraph += paragraph + "\n"
-        # else:
-        #     merged.append(current_paragraph.strip())
-        #     current_paragraph = paragraph + "\n"
-        merged.append(current_paragraph.strip())
-        current_paragraph = paragraph + "\n"
+        if len(current_paragraph) + len(paragraph) + 1 <= max_length:
+            current_paragraph += paragraph + "\n"
+        else:
+            merged.append(current_paragraph.strip())
+            current_paragraph = paragraph + "\n"
 
     if current_paragraph.strip():
         merged.append(current_paragraph.strip())
@@ -51,17 +49,14 @@ def process_files(repo_path: str, config, translate_func: str):
             paragraphs = content.split("\n")
 
             # 合并较小的段落
-            merged_paragraphs = merge_paragraphs(paragraphs, 2048)
+            merged_paragraphs = merge_paragraphs(paragraphs, 10240)
 
             translated = ""
-            # for merged_paragraph in merged_paragraphs:
-            #     translated_merged_paragraph = translate_func(
-            #         merged_paragraph, source_language, target_language, api_key, file_type_prompt)
-            #     # 合并的翻译段落
-            #     translated += translated_merged_paragraph
-            translated = translate_func(
-                    paragraphs, source_language, target_language, api_key, file_type_prompt)
+            for merged_paragraph in merged_paragraphs:
+                translated_merged_paragraph = translate_func(
+                    merged_paragraph, source_language, target_language, api_key, file_type_prompt)
                 # 合并的翻译段落
+                translated += translated_merged_paragraph
 
             logging.info("Translation completed.")
 
