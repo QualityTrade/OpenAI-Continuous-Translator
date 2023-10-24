@@ -4,7 +4,7 @@ import openai
 
 MARKDOWN_PROMPT = """
 Your task is to translate a Markdown file, while preserving the original formatting,
-including inline elements like links and images. Make sure to ignore text inside HTML tags, code blocks, and square brackets.
+including inline elements like links and images. Make sure to ignore text inside HTML tags, code blocks, and square brackets or links like ([content]).
 Be cautious when translating Markdown links,
 Markdown images, and Markdown headings. Make sure TOC links like (#content) are translated.
 """
@@ -62,12 +62,12 @@ def translate(text: str, source_language: str, target_language: str, api_key: st
     while retries > 0:
         try:
             system_prompt = f"You are a helpful assistant that translates {source_language} to {target_language}. {file_prompt}"
-            user_prompt = f"""Instructions: Translate the following {source_language} text to {target_language} 
-while maintaining the original formatting: "{text}"
-format: Return only the translated content, not including the original text."""
+            user_prompt = f"""Translate the following {source_language} text to {target_language}
+                              while maintaining the original formatting: "{text}"
+                              Also, Return only the translated content, not including the original text."""
             logging.info(f"Translating paragraphs: {text}")
             logging.info(f"System prompt: {system_prompt}")
-            logging.info(f"User prompt: {user_prompt}")
+            logging.info(f"User prompt: {user_prompt}" + "\n")
 
             time.sleep(3)  # Sleep for 3 seconds before each API call
             # 调用 ChatGPT API
@@ -92,7 +92,7 @@ format: Return only the translated content, not including the original text."""
                 .decode()
             )
             result = t_text.strip()
-            logging.info(f"Translated paragraphs: {result}")
+            logging.info(f"Translated paragraphs: {result}" + "\n")
             return result
         except Exception as e:
             retries -= 1
