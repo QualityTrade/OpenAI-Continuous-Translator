@@ -73,7 +73,7 @@ Also, Return only the translated content, not including the original text."""
             time.sleep(3)  # Sleep for 3 seconds before each API call
             # 调用 ChatGPT API
             completion = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model="gpt-3.5-turbo-16k",
                 messages=[
                     {
                         "role": "system",
@@ -96,7 +96,7 @@ Also, Return only the translated content, not including the original text."""
 
             if completion['finish_reason'] == 'length':
                 completion = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-3.5-turbo-16k",
                     messages=[
                         {
                             "role": "user",
