@@ -94,33 +94,12 @@ Also, Return only the translated content, not including the original text."""
                 .decode()
             )
 
-            if completion['finish_reason'] == 'length':
-                completion = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo-16k",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": "Continue generating",
-                        }
-                    ],
-                )
-                t_text += (
-                    completion["choices"][0]
-                    .get("message")
-                    .get("content")
-                    .encode("utf8")
-                    .decode()
-                )
-
             result = t_text.strip()
             logging.info(f"Translated paragraphs: {result}" + "\n")
             return result
         except Exception as e:
             retries -= 1
             wait_time = 60
-            logging.info(
-                completion(["choices"])
-            )
             logging.warning(
                 f"Error occurred: {e}. Waiting for 60 seconds. Retries remaining: {retries}.")
             time.sleep(wait_time)
