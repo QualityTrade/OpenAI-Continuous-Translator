@@ -41,7 +41,6 @@ def process_files(repo_path: str, config, translate_func: str):
             logging.info(f"Processing file: {file_path}")
             with open(file_path, "r") as f:
                 content = f.read()
-                file_length = len(f.readlines())
 
             file_type_prompt = get_prompt_based_on_file_type(
                 file_path) + additional_prompt
@@ -50,7 +49,7 @@ def process_files(repo_path: str, config, translate_func: str):
             paragraphs = content.split("\n")
 
             # 合并较小的段落
-            merged_paragraphs = merge_paragraphs(paragraphs, file_length)
+            merged_paragraphs = merge_paragraphs(paragraphs, len(paragraphs))
 
             translated = ""
             for merged_paragraph in merged_paragraphs:
