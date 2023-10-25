@@ -118,6 +118,9 @@ Also, Return only the translated content, not including the original text."""
         except Exception as e:
             retries -= 1
             wait_time = 60
+            logging.info(
+                completion(["choices"])
+            )
             logging.warning(
                 f"Error occurred: {e}. Waiting for 60 seconds. Retries remaining: {retries}.")
             time.sleep(wait_time)
