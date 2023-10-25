@@ -49,14 +49,20 @@ def process_files(repo_path: str, config, translate_func: str):
             paragraphs = content.split("\n")
 
             # 合并较小的段落
-            merged_paragraphs = merge_paragraphs(paragraphs, len(paragraphs))
+            merged_paragraphs = merge_paragraphs(paragraphs, len(content))
 
-            translated = ""
-            for merged_paragraph in merged_paragraphs:
-                translated_merged_paragraph = translate_func(
-                    merged_paragraph, source_language, target_language, api_key, file_type_prompt)
-                # 合并的翻译段落
-                translated += translated_merged_paragraph
+            translated = translate_func(
+                merged_paragraphs,
+                source_language,
+                target_language,
+                api_key,
+                file_type_prompt
+            )
+            # for merged_paragraph in merged_paragraphs:
+            #     translated_merged_paragraph = translate_func(
+            #         merged_paragraph, source_language, target_language, api_key, file_type_prompt)
+            #     # 合并的翻译段落
+            #     translated += translated_merged_paragraph
 
             logging.info("Translation completed.")
 
