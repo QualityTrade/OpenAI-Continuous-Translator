@@ -5,7 +5,7 @@ import openai
 MARKDOWN_PROMPT = """
 Your task is to translate a Markdown file, while preserving the original formatting,
 including inline elements like links and images. Make sure to ignore HTML tags, and code blocks.
-You can ignore text inside tabs or ({% tabs %}), and expandable blocks or ({% swagger %})
+Make sure to ignore text inside tabs or ({% tabs %}), expandable blocks or ({% swagger %}), and json blocks.
 Be cautious when translating Markdown links,
 Markdown images, and Markdown headings. Make sure TOC links like (#content) are translated.
 """
@@ -73,7 +73,7 @@ Also, Return only the translated content, not including the original text."""
             time.sleep(3)  # Sleep for 3 seconds before each API call
             # 调用 ChatGPT API
             completion = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo-16k",
+                model="gpt-3.5-turbo",
                 messages=[
                     {
                         "role": "system",
