@@ -85,6 +85,7 @@ Also, Return only the translated content, not including the original text."""
                     }
                 ],
             )
+
             t_text = (
                 completion["choices"][0]
                 .get("message")
@@ -92,6 +93,25 @@ Also, Return only the translated content, not including the original text."""
                 .encode("utf8")
                 .decode()
             )
+
+            if completion['finish_reason'] == 'length':
+                completion = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": "Continue generating",
+                        }
+                    ],
+                )
+                t_text += (
+                    completion["choices"][0]
+                    .get("message")
+                    .get("content")
+                    .encode("utf8")
+                    .decode()
+                )
+
             result = t_text.strip()
             logging.info(f"Translated paragraphs: {result}" + "\n")
             return result
