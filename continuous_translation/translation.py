@@ -57,9 +57,8 @@ def get_prompt_based_on_file_type(file_path: str) -> str:
     else:
         return CODE_PROMPT + f"The file name is {file_path}. You can infer the file type from the file name."
 
-def translate(text: str, source_language: str, target_language: str, api_key: str, organization: str, file_prompt="") -> str:
+def translate(text: str, source_language: str, target_language: str, api_key: str, file_prompt="") -> str:
     openai.api_key = api_key
-    openai.organization = organization
     retries = 3
     while retries > 0:
         try:

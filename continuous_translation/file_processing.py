@@ -29,7 +29,6 @@ def process_files(repo_path: str, config, translate_func: str):
     source_language: str = config["SOURCE_LANGUAGE"]
     target_language: str = config["TARGET_LANGUAGE"]
     api_key: str = config["API_KEY"]
-    organization: str = config["ORGANIZATION"]
     additional_prompt: str = config["ADDITIONAL_PROMPT"]
     # 遍历文件
     for root, _, files in os.walk(repo_path):
@@ -56,7 +55,7 @@ def process_files(repo_path: str, config, translate_func: str):
             translated = ""
             for merged_paragraph in merged_paragraphs:
                 translated_merged_paragraph = translate_func(
-                    merged_paragraph, source_language, target_language, api_key, organization, file_type_prompt)
+                    merged_paragraph, source_language, target_language, api_key, file_type_prompt)
                 # 合并的翻译段落
                 translated += translated_merged_paragraph
 

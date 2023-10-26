@@ -9,9 +9,6 @@ inputs:
   api_key:
     description: "The OpenAI api key to use for translation"
     required: true
-  organization:
-    description: "The OpenAI organization"
-    required: false
   source_language:
     description: "The source language to translate from. The default is English"
     required: false
@@ -36,10 +33,6 @@ inputs:
     description: "The file path filter to translate. The default is all files"
     required: false
     default: '.*'
-  file_paths_exclude:
-    description: "The file path exclude to exclude in translation. The default is no exclusion."
-    required: false
-    default: '^$'
 runs:
   using: "docker"
   image: "Dockerfile"
