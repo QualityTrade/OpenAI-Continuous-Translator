@@ -3,7 +3,7 @@ import time
 import openai
 
 MARKDOWN_PROMPT = """
-Your task is to translate a Markdown file, while preserving the original formatting,
+Translate this markdown file while maintaining original formatting,
 including inline elements like links and images. Make sure to ignore HTML tags, and code blocks.
 Be cautious when translating Markdown links,
 Markdown images, and Markdown headings. Make sure TOC links like (#content) are translated.
@@ -62,9 +62,7 @@ def translate(text: str, source_language: str, target_language: str, api_key: st
     while retries > 0:
         try:
             system_prompt = f"You are a helpful assistant that translates {source_language} to {target_language}. {file_prompt}"
-            user_prompt = f"""Translate the following {source_language} text to {target_language}
-while maintaining the original formatting.
-Also, Return only the translated content, not including the original text.
+            user_prompt = f"""Translate the following text to {target_language} while maintaining the original formatting. Also, Return only the translated content, not including the original text.
 Here's the text: "{text}"
 """
             time.sleep(3)  # Sleep for 3 seconds before each API call
