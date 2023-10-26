@@ -75,7 +75,7 @@ Here's the text: "{text}"
             time.sleep(3)  # Sleep for 3 seconds before each API call
             # 调用 ChatGPT API
             completion = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo-16k",
+                model="gpt-4",
                 messages=[
                     {
                         "role": "system",
