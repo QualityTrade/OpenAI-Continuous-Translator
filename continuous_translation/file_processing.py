@@ -52,7 +52,7 @@ def process_files(repo_path: str, config, translate_func: str):
             paragraphs = content.split("\n")
 
             # 合并较小的段落
-            merged_paragraphs = merge_paragraphs(paragraphs, 20480)
+            merged_paragraphs = merge_paragraphs(paragraphs, 10240)
 
             translated = translate_func(
                     merged_paragraphs[0], source_language, target_language, api_key, file_type_prompt)
