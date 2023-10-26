@@ -67,10 +67,6 @@ while maintaining the original formatting.
 Also, Return only the translated content, not including the original text.
 Here's the text: "{text}"
 """
-            logging.info(f"Translating paragraphs: {text}" + "\n")
-            # logging.info(f"System prompt: {system_prompt}" + "\n")
-            # logging.info(f"User prompt: {user_prompt}" + "\n")
-
             time.sleep(3)  # Sleep for 3 seconds before each API call
             # 调用 ChatGPT API
             completion = openai.ChatCompletion.create(
@@ -95,10 +91,9 @@ Here's the text: "{text}"
                 .decode()
             )
 
-            logging.info(t_text)
+            logging.info(completion)
 
             result = t_text.strip()
-            # logging.info(f"Translated paragraphs: {result}" + "\n")
             return result
         except Exception as e:
             retries -= 1
