@@ -5,7 +5,7 @@ import openai
 MARKDOWN_PROMPT = """
 Your task is to translate a Markdown file, while preserving the original formatting,
 including inline elements like links and images. Make sure to ignore HTML tags, and code blocks.
-Make sure to ignore text inside tabs or ({% tabs %}), expandable blocks or ({% swagger %}), and json blocks.
+Make sure to ignore text inside tabs {% tabs %}, expandable blocks {% swagger %}, code blocks with json, comments //, and links [content].
 Be cautious when translating Markdown links,
 Markdown images, and Markdown headings. Make sure TOC links like (#content) are translated.
 """
