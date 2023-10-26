@@ -35,9 +35,11 @@ def process_files(repo_path: str, config, translate_func: str):
         for file in files:
             if re.match(config["FILE_PATHS_FILTER"], file) is None:
                 continue
+            if re.match(config["FILE_PATHS_EXCLUDED"], file):
+                continue
             if not file.endswith(tuple(config["FILE_TYPES"].split(","))):
                 continue
-            
+
             file_path = os.path.join(root, file)
             logging.info(f"Processing file: {file_path}")
             with open(file_path, "r") as f:

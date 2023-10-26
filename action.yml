@@ -33,6 +33,10 @@ inputs:
     description: "The file path filter to translate. The default is all files"
     required: false
     default: '.*'
+  file_paths_excluded:
+    description: "The file path excluded in translations."
+    required: false
+    default: '^$'
 runs:
   using: "docker"
   image: "Dockerfile"
