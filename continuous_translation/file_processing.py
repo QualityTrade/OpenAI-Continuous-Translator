@@ -39,54 +39,36 @@ def process_files(repo_path: str, config, translate_func: str):
                 continue
             
             file_path = os.path.join(root, file)
+            logging.info(f"Processing file: {file_path}")
+            with open(file_path, "r") as f:
+                content = f.read()
 
-            if not re.match(config["FILE_PATHS_EXCLUDE"], file):
-                logging.info(f"Processing file: {file_path}")
-                with open(file_path, "r") as f:
-                    content = f.read()
+            file_type_prompt = get_prompt_based_on_file_type(
+                file_path) + additional_prompt
 
-                file_type_prompt = get_prompt_based_on_file_type(
-                    file_path) + additional_prompt
+            # 将文本拆分为段落并跟踪换行符数量
+            paragraphs = content.split("\n")
 
-                # 将文本拆分为段落并跟踪换行符数量
-                paragraphs = content.split("\n")
+            # 合并较小的段落
+            merged_paragraphs = merge_paragraphs(paragraphs, len(content))
 
-                # 合并较小的段落
-                merged_paragraphs = merge_paragraphs(paragraphs, len(content))
+            translated = ""
+            for merged_paragraph in merged_paragraphs:
+                translated_merged_paragraph = translate_func(
+                    merged_paragraph, source_language, target_language, api_key, file_type_prompt)
+                # 合并的翻译段落
+                translated += translated_merged_paragraph
 
-                translated = ""
-                for merged_paragraph in merged_paragraphs:
-                    translated_merged_paragraph = translate_func(
-                        merged_paragraph, source_language, target_language, api_key, file_type_prompt)
-                    # 合并的翻译段落
-                    translated += translated_merged_paragraph
+            logging.info("Translation completed.")
 
-                logging.info("Translation completed.")
+            # 保存翻译后的文件
+            translated_file_path = os.path.join(root, f"{file}")
 
-                # 保存翻译后的文件
-                translated_file_path = os.path.join(root, f"{file}")
-
-                logging.info(f"Saving translated file: {translated_file_path}")
-                with open(translated_file_path, "w") as f:
-                    f.write(translated)
-                logging.info("File saved.")
-            else:
-                with open(file_path, "r") as f:
-                    content = f.read()
+            logging.info(f"Saving translated file: {translated_file_path}")
+            with open(translated_file_path, "w") as f:
+                f.write(translated)
+            logging.info("File saved.")
                 
-                paragraphs = content.split("\n")
-
-                paragraphs = merge_paragraphs(paragraphs, len(content))
-
-                for paragraph in paragraphs:
-                    save_text = paragraph
-
-                file_path = os.path.join(root, f"{file}")
-
-                logging.info(f"Saving excluded file: {file_path}")
-                with open(file_path, "w") as f:
-                    f.write(save_text)
-                logging.info("File saved.")
                 
 
 # remove .git folder and move files to root

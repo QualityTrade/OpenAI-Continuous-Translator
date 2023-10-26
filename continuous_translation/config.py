@@ -14,7 +14,6 @@ def load_config():
         "ADDITIONAL_PROMPT": os.environ.get("INPUT_ADDITIONAL_PROMPT", ""),
         "FILE_TYPES": os.environ.get("INPUT_FILE_TYPES", "md,mdx,rst,txt,py,js,json,html,cpp,c,ipynb"),
         "FILE_PATHS_FILTER": os.environ.get("INPUT_FILE_PATHS_FILTER", ".*"),
-        "FILE_PATHS_EXCLUDE": os.environ.get("INPUT_FILE_PATHS_EXCLUDE", "^$")
     }
 
     missing_keys = not config["API_KEY"] or not config["GIT_REPO_URL"]
