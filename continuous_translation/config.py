@@ -10,6 +10,7 @@ def load_config():
         "SOURCE_LANGUAGE": os.environ.get("INPUT_SOURCE_LANGUAGE", "English"),
         "TARGET_LANGUAGE": os.environ.get("INPUT_TARGET_LANGUAGE", "Chinese"),
         "API_KEY": os.environ.get("INPUT_API_KEY", ""),
+        "ORGANIZATION": os.environ.get("INPUT_ORGANIZATION", ""),
         "I18N_SURFIX": os.environ.get("INPUT_I18N_SURFIX", ""),
         "ADDITIONAL_PROMPT": os.environ.get("INPUT_ADDITIONAL_PROMPT", ""),
         "FILE_TYPES": os.environ.get("INPUT_FILE_TYPES", "md,mdx,rst,txt,py,js,json,html,cpp,c,ipynb"),
