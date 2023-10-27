@@ -67,6 +67,7 @@ def translate(text: str, source_language: str, target_language: str, api_key: st
             user_prompt = f"""Translate the following text to {target_language} while maintaining the original formatting. Also, Return only the translated content, not including the original text.
 Here's the text: "{text}"
 """
+            logging.info(f"Translating paragraph: {text}")
             time.sleep(3)  # Sleep for 3 seconds before each API call
             # 调用 ChatGPT API
             completion = openai.ChatCompletion.create(
