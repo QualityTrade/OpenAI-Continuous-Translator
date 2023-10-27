@@ -6,7 +6,7 @@ MARKDOWN_PROMPT = """
 Translate this gitbook markdown file while maintaining original formatting,
 including inline elements like links and images. Make sure to ignore text inside HTML tags, and code blocks like (```).
 Make sure to also ignore tabs block or navigation tabs block, and gitbook's swagger blocks.
-Be cautious when translating Markdown links, Markdown images, and Markdown headings.
+Ignore translating Markdown links, Markdown images, and Markdown headings.
 """
 
 RST_PROMPT = """
